@@ -121,6 +121,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
             <ul class="event-list">
 
             <?php foreach($events->posts as $event) : ?>
+
                 <?php if ($event->ID == $post->ID) continue; ?>
                 <li>
                     <article id="post-<?php $event->ID; ?>">
@@ -134,8 +135,8 @@ class ATRU_UpcomingEvents extends WP_Widget {
                         </header>
 
                         <section class="button-list">
-                            <a class="learn-more button" href="<?php get_permalink($event->ID); ?>" alt="Learn more about <?php echo $event->post_title; ?>">Learn More</a>
-                            <a class="buy-now button" href="<?php get_permalink($event->ID); ?>" alt="Buy tickets for <?php echo $event->post_title; ?>">Buy Now</a>
+                            <a class="learn-more button" href="<?php echo get_permalink($event->ID); ?>" alt="Learn more about <?php echo $event->post_title; ?>">Learn More</a>
+                            <a class="buy-now button" href="<?php echo get_permalink($event->ID); ?>" alt="Buy tickets for <?php echo $event->post_title; ?>">Buy Now</a>
                         </section>
 
                 </li>
@@ -151,14 +152,14 @@ class ATRU_UpcomingEvents extends WP_Widget {
 
     function get_event_date_range($post_id){
         $metadata = get_post_custom($post_id); 
-        $start_date = $metadata['start_date'][0];
-        $end_date = $metadata['end_date'][0];
+        $_startdate = $metadata['start_date'][0];
+        $_enddate = $metadata['end_date'][0];
 
-        if($start_date == $end_date){
-            $date = date("F j, Y", strtotime($metadata['start_date'][0]));
+        if($_startdate == $_enddate){
+            $date = date("F j, Y", strtotime($_startdate));
         } else {
-            $startdate = date("F j", strtotime($metadata['start_date'][0]));
-            $enddate = date("-j, Y", strtotime());
+            $startdate = date("F j", strtotime($_startdate));
+            $enddate = date("-j, Y", strtotime($_enddate));
             $date = $startdate.$enddate;
         }
 
