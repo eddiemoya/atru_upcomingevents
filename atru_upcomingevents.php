@@ -93,7 +93,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
             }
 
             $tax_query = array();
-            $event_types = get_the_terms($post->ID, 'event_type');
+            $event_types = get_the_terms($post->ID, 'genre');
 
             if(!empty($event_types) && !is_wp_error($event_types)){
                 $et_ids = wp_list_pluck($event_types, 'term_id');
@@ -110,7 +110,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
             }
 
             $event_query = array(
-                'post_type' => 'event',
+                'post_type' => 'tcms_production',
                 'tax_query' => $tax_query,
                 'posts_per_page' => $instance['limit']
                 );
@@ -124,14 +124,15 @@ class ATRU_UpcomingEvents extends WP_Widget {
 
                 <?php if ($event->ID == $post->ID) continue; ?>
                 <li>
-                    <article id="post-<?php $event->ID; ?>">
+                    <article id="post-<?php echo $event->ID; ?>">
                         <?php if ( has_post_thumbnail($event->ID)) : ?>
                             <?php echo get_the_post_thumbnail($event->ID, 'thumbnail'); ?>
                         <?php endif; ?>
-
+                        <?php $artist = array_pop(wp_get_post_terms($event->ID, 'theatre_artists')); ?>
                         <header class="entry-header">
                             <h4 class="entry-title"><?php echo $event->post_title; ?></h4>
-                            <span><?php  echo $this->get_event_date_range($event->ID); ?></span>
+                            <h5 class="artist-name"><?php echo $artist->name; ?></h4>
+                            <span><?php  echo tcms_get_production_daterange($event->ID); ?></span>
                         </header>
 
                         <section class="button-list">
