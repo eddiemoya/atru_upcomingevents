@@ -135,7 +135,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
                         <?php $artist = array_pop(wp_get_post_terms($event->ID, 'theatre_artists')); ?>
                         <header class="entry-header">
                             <h4 class="entry-title"><?php echo $event->post_title; ?></h4>
-                            <h5 class="artist-name"><?php echo $artist->name; ?></h4>
+                            <h5 class="artist-name"><?php echo $artist->name; ?></h5>
                             <span><?php  echo tcms_get_production_daterange($event->ID); ?></span>
                         </header>
 
