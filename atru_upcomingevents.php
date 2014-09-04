@@ -116,6 +116,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
                 );
 
             $events = new WP_Query( $event_query );
+            $production_metadata = get_post_custom();
 
             ?>
             <ul class="event-list">
@@ -123,6 +124,9 @@ class ATRU_UpcomingEvents extends WP_Widget {
             <?php foreach($events->posts as $event) : ?>
 
                 <?php if ($event->ID == $post->ID) continue; ?>
+
+                <?php $metadata = get_post_custom($event->ID); ?>
+
                 <li>
                     <article id="post-<?php echo $event->ID; ?>">
                         <?php if ( has_post_thumbnail($event->ID)) : ?>
@@ -137,7 +141,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
 
                         <section class="button-list">
                             <a class="learn-more button" href="<?php echo get_permalink($event->ID); ?>" alt="Learn more about <?php echo $event->post_title; ?>">Learn More</a>
-                            <a class="buy-now button" href="<?php echo get_permalink($event->ID); ?>" alt="Buy tickets for <?php echo $event->post_title; ?>">Buy Now</a>
+                            <a class="buy-now button" href="<?php echo $metadata['tcms_ticketsURL'][0]; ?>" alt="Buy tickets for <?php echo $event->post_title; ?>">Buy Now</a>
                         </section>
 
                 </li>
