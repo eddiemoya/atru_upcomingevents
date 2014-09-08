@@ -112,7 +112,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
             $event_query = array(
                 'post_type' => 'tcms_production',
                 'tax_query' => $tax_query,
-                'posts_per_page' => $instance['limit']
+                'posts_per_page' => $instance['limit'],
                 );
 
             $events = new WP_Query( $event_query );
@@ -141,7 +141,7 @@ class ATRU_UpcomingEvents extends WP_Widget {
 
                         <section class="button-list">
                             <a class="learn-more button" href="<?php echo get_permalink($event->ID); ?>" alt="Learn more about <?php echo $event->post_title; ?>">Learn More</a>
-                            <a class="buy-now button" href="<?php echo $metadata['tcms_ticketsURL'][0]; ?>" alt="Buy tickets for <?php echo $event->post_title; ?>">Buy Now</a>
+                            <a class="buy-now button" target="_blank" href="<?php echo $metadata['tcms_ticketsURL'][0]; ?>" alt="Buy tickets for <?php echo $event->post_title; ?>">Buy Now</a>
                         </section>
 
                 </li>
