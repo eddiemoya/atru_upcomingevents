@@ -113,6 +113,9 @@ class ATRU_UpcomingEvents extends WP_Widget {
                 'post_type' => 'tcms_production',
                 'tax_query' => $tax_query,
                 'posts_per_page' => $instance['limit'],
+                'meta_key' => 'tcms_opening',
+                'orderby' => 'meta_value_num', 
+                'order' => 'ASC'
                 );
 
             $events = new WP_Query( $event_query );
